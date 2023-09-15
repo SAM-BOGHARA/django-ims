@@ -11,7 +11,7 @@
     />
     <meta name="description" content="" />
     <meta name="Shubham Boghara" content="Inventory Management System" />
-    <title>App</title>
+    <title>Inventory App</title>
     <link
       href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
       rel="stylesheet"
@@ -36,8 +36,8 @@
       <a class="navbar-brand pt-2 text-md-center" href="/">
         <!-- <h3>LTC Portal</h3> -->
         <img
-          src="{% static 'assets/img/rentokil-new.png' %}"
-          alt="rentokil-logo"
+          src="{% static 'assets/img/image.png' %}"
+          alt=""
           class="img-fluid"
         />
       </a>
@@ -63,9 +63,7 @@
             aria-expanded="false"
           >
             <i class="fas fa-user fa-fw"></i>
-            <span class="d-none d-lg-inline text-dark"
-              >{{ request.user.username }}</span
-            >
+            <span class="d-none d-lg-inline">{{ request.user.username }}</span>
             <span class="d-lg-none"
               >{{ request.user.username | truncatechars:12 }}</span
             >
@@ -127,7 +125,7 @@
                 data-bs-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="">
+                  <a class="nav-link" href="{% url "categories" %}">
                     <div class="sb-nav-link-icon">
                       <i class="fa-brands fa-wpforms"></i>
                     </div>
@@ -167,8 +165,22 @@
               </div>
 
               {% comment %} Dashboard {% endcomment %}
-              <div class="sb-sidenav-menu-heading text-white">
-                NAVIGATION
+              <div class="sb-sidenav-menu-heading text-white">NAVIGATION</div>
+
+              <div
+                class="collapse show"
+                id="collapseLayouts"
+                aria-labelledby="headingOne"
+                data-bs-parent="#sidenavAccordion"
+              >
+                <nav class="sb-sidenav-menu-nested nav">
+                  <a class="nav-link" href="{% url 'items' %}">
+                    <div class="sb-nav-link-icon">
+                      <i class="fa-brands fa-wpforms"></i>
+                    </div>
+                    Items
+                  </a>
+                </nav>
               </div>
 
               <div
@@ -178,41 +190,11 @@
                 data-bs-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="">
+                  <a class="nav-link" href="{% url 'add_item' %}">
                     <div class="sb-nav-link-icon">
                       <i class="fa-brands fa-wpforms"></i>
                     </div>
                     Add Item
-                  </a>
-                </nav>
-              </div>
-              <div
-                class="collapse show"
-                id="collapseLayouts"
-                aria-labelledby="headingOne"
-                data-bs-parent="#sidenavAccordion"
-              >
-                <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="">
-                    <div class="sb-nav-link-icon">
-                      <i class="fa-brands fa-wpforms"></i>
-                    </div>
-                    Delete Item
-                  </a>
-                </nav>
-              </div>
-              <div
-                class="collapse show"
-                id="collapseLayouts"
-                aria-labelledby="headingOne"
-                data-bs-parent="#sidenavAccordion"
-              >
-                <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="">
-                    <div class="sb-nav-link-icon">
-                      <i class="fa-brands fa-wpforms"></i>
-                    </div>
-                    Update Item
                   </a>
                 </nav>
               </div>
