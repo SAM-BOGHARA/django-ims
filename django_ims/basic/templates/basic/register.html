@@ -1,0 +1,51 @@
+{% extends 'basic/base.html' %}
+{% load static %}
+{% block start %}
+
+<div class="container mt-5">
+    <form class="col-md-6 col-sm-8 col-xs-12 mx-auto card p-3 shadow-lg" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if messages %}
+        {% for message in messages %}
+
+        <div class="alert {{message.tags}} " role="alert">
+            {{ message | safe }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2>Register</h2>
+        
+        <div class="form-group">
+            <label for="lastName">Username </label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="Enter Email"
+                placeholder="Enter Username" required>
+                <!-- <input type="text" pattern="[6789][0-9]{9}" title="Please enter valid phone number"> -->
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <p>Already have an account? <a href="/login/" class="text-decoration-none">Login here</a></p>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <hr>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
