@@ -36,7 +36,7 @@
       <a class="navbar-brand pt-2 text-md-center" href="/">
         <!-- <h3>LTC Portal</h3> -->
         <img
-          src="{% static 'assets/img/image.png' %}"
+          src="{% static 'assets/img/invent.jpg' %}"
           alt=""
           class="img-fluid"
         />
@@ -110,7 +110,7 @@
                 data-bs-parent="#sidenavAccordion"
               >
                 <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="">
+                  <a class="nav-link" href="{% url "dashboard" %}">
                     <div class="sb-nav-link-icon">
                       <i class="fa-brands fa-wpforms"></i>
                     </div>
@@ -150,6 +150,41 @@
               </div>
               
               {% comment %} Dashboard {% endcomment %}
+                            <div class="sb-sidenav-menu-heading text-white">FORMS</div>
+
+              <div
+                class="collapse show"
+                id="collapseLayouts"
+                aria-labelledby="headingOne"
+                data-bs-parent="#sidenavAccordion"
+              >
+                <nav class="sb-sidenav-menu-nested nav">
+                  <a class="nav-link" href="{% url 'request_form' %}">
+                    <div class="sb-nav-link-icon">
+                      <i class="fa-brands fa-wpforms"></i>
+                    </div>
+                    Request Form
+                  </a>
+                </nav>
+              </div>
+              {% if request.user.is_superuser %}
+              <div
+                class="collapse show"
+                id="collapseLayouts"
+                aria-labelledby="headingOne"
+                data-bs-parent="#sidenavAccordion"
+              >
+                <nav class="sb-sidenav-menu-nested nav">
+                  <a class="nav-link" href="{% url 'review_request' %}">
+                    <div class="sb-nav-link-icon">
+                      <i class="fa-brands fa-wpforms"></i>
+                    </div>
+                    View Requests
+                  </a>
+                </nav>
+              </div>
+              {% endif %}
+
               <div class="sb-sidenav-menu-heading text-white">NAVIGATION</div>
 
               <div

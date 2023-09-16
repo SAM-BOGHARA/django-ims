@@ -9,6 +9,10 @@ urlpatterns = [
    path('items/', items, name = "items"),
    path('add_item/', additem, name = "add_item"),
    path('delete_item/<int:id>', delete_item, name = "delete_item"),  
+   path('update_item/<int:id>', update_item, name = "delete_item"),  
    path('categories/',categories,name = "categories"),
    path('locations/',locations,name = "locations"),
+   path('request_form/', request_form, name = "request_form"),
+   path('review_request/',review_request, name = "review_request"),
+   path('review-form/<int:id>', review_form, name = "review_form"),
 ]

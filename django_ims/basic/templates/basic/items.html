@@ -6,19 +6,20 @@
     <div class="col-md-6 col-lg-4 mb-4">
       <div class="card">
         <div class="card-body">
-          <h1 class="fw-bolder display-2">{{ item.name }} {{ item.id }}</h1>
-          <p class="lead">{{ item.description }}</p>
-          <p class="lead">{{ item.location }}</p>
-          <p class="lead">{{ item.quantity }}</p>
+          <h4 class="fw-bolder">{{ item.name }}</h4>
+          <p class="lead">Description :{{ item.description }}</p>
+          <p class="lead">Location :{{ item.location }}</p>
+          <p class="lead">Quantity :{{ item.quantity }}</p>
+          <p class="lead">Price :{{ item.price }}</p>
         </div>
+        {% if request.user.is_superuser %}
         <div class="card-footer">
-            <a class="btn btn-danger" href="/delete_item/{{item.id}}">
-                Delete
-            </a>
-            <a class="btn btn-primary" href="/delete_item/{{item.id}}">
-                Update
-            </a>
+          <a class="btn btn-danger" href="/delete_item/{{item.id}}"> Delete </a>
+          <a class="btn btn-primary" href="/update_item/{{item.id}}">
+            Update
+          </a>
         </div>
+        {% endif %}
       </div>
     </div>
     {% endfor %}

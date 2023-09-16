@@ -1,0 +1,101 @@
+{% extends 'basic/base1.html' %}
+
+{% block start %}
+
+{% if queryset %}
+<h2 class="mt-2">Review Requests</h2>
+
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Total</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+
+                <div class="small text-white fw-bold">{{total}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">Pending</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+
+                <div class="small text-white fw-bold">{{pending}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">Approved</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+
+                <div class="small text-white fw-bold">{{approved}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <div class="card-body">Rejected</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+
+                <div class="small text-white fw-bold">{{rejected}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Approval Requests
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple" class="" scrollY>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Review</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for query in queryset %}
+                <tr>
+                    <td>{{ query.name}}</td>
+                    <td>{{ query.itemname }}</td>
+                    <td>
+                        {{ query.quantity}}
+                    </td>
+                    <td>{{ query.category }}</td>
+                    <td>
+                        {% if query.approved %}
+                        Approved ✅ 
+                        {% elif query.rejected %}
+                        Rejected ❌
+                        {% else %}
+                        Pending ❗
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/review-form/{{ query.id }}" class="btn btn-success btn-sm">Review</a>
+                       
+                    </td>
+                </tr>
+
+                {% empty %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+{% endblock %}

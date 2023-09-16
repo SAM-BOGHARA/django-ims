@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .forms import Itemform
+from .forms import *
 from .models import *
 
 # Create your views here.
@@ -52,6 +52,7 @@ def locations(request):
     )
 
 
+# todo -- search item, request form,review request, alert quantity
 def items(request):
     queryset = Item.objects.all()
 
@@ -74,10 +75,65 @@ def additem(request):
     return render(request, "basic/additem.html", context)
 
 
+def request_form(request):
+    form = RequestForm()
+
+    if request.method == "POST":
+        form = RequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "basic/dashboard.html")
+
+    context = {
+        "form": form,
+    }
+    return render(request, "basic/request_form.html", context)
+
+
+def review_request(request):
+    queryset = Request.objects.all()
+    total = queryset.count()
+    app = Request.objects.filter(approved=True).count()
+    rej = Request.objects.filter(rejected=True).count()
+    pending = total - app - rej
+    context = {
+        "queryset": queryset,
+        "total": total,
+        "approved": app,
+        "rejected": rej,
+        "pending": pending,
+    }
+    return render(request, "basic/review-requests.html", context)
+
+
+def review_form(request, id):
+    item = Request.objects.get(id=id)
+    form = RequestFormUpdate(request.POST or None, instance=item)
+    if form.is_valid():
+        form.save()
+        return render(request, "basic/dashboard.html")
+    context = {
+        "form": form,
+    }
+    return render(request, "basic/review_form.html", context)
+
+
 def delete_item(request, id):
     item = Item.objects.get(id=id)
     item.delete()
     return render(request, "basic/items.html")
+
+
+def update_item(request, id):
+    item = Item.objects.get(id=id)
+    form = Itemform(request.POST or None, instance=item)
+    if form.is_valid():
+        form.save()
+        return render(request, "basic/dashboard.html")
+    context = {
+        "form": form,
+    }
+    return render(request, "basic/additem.html", context)
 
 
 def login_page(request):
