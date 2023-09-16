@@ -10,8 +10,8 @@ from .models import *
 # Create your views here.
 
 
-def dashboard(request):
-    return render(request, "basic/dashboard.html")
+# def dashboard(request):
+#     return render(request, "basic/dashboard.html")
 
 
 def categories(request):
@@ -51,6 +51,9 @@ def locations(request):
         },
     )
 
+def item(request,id):
+    queryset = Item.objects.get(id = id)
+    return render(request, 'basic/item.html',{'item': queryset})
 
 # todo -- search item, request form,review request, alert quantity
 def items(request):
@@ -67,7 +70,7 @@ def additem(request):
         form = Itemform(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "basic/dashboard.html")
+            return render(request, "basic/category.html")
 
     context = {
         "form": form,
@@ -82,7 +85,7 @@ def request_form(request):
         form = RequestForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "basic/dashboard.html")
+            return render(request, "basic/category.html")
 
     context = {
         "form": form,
@@ -111,7 +114,7 @@ def review_form(request, id):
     form = RequestFormUpdate(request.POST or None, instance=item)
     if form.is_valid():
         form.save()
-        return render(request, "basic/dashboard.html")
+        return render(request, "basic/category.html")
     context = {
         "form": form,
     }
@@ -129,7 +132,7 @@ def update_item(request, id):
     form = Itemform(request.POST or None, instance=item)
     if form.is_valid():
         form.save()
-        return render(request, "basic/dashboard.html")
+        return render(request, "basic/category.html")
     context = {
         "form": form,
     }

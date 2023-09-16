@@ -1,9 +1,9 @@
-{% extends 'basic/base1.html' %} {% block start %} {% load qr_code %} {% for
-item in items %}
+{% extends 'basic/base1.html' %} {% block start %}
+{% load qr_code %}
 
+{% if item %}
 <div class="container py-5">
   <div class="row mb-6">
-    {% for item in items %}
     <div class="col-md-6 col-lg-4 mb-4">
       <div class="card">
         <div class="card-body">
@@ -12,7 +12,7 @@ item in items %}
           <p class="lead">Location :{{ item.location }}</p>
           <p class="lead">Quantity :{{ item.quantity }}</p>
           <p class="lead">Price :{{ item.price }}</p>
-          {% qr_from_text "http://127.0.0.1:8000/item/" size="T" %}
+          {% qr_from_text "http://127.0.0.1:8000/item_qr/" size="T" %}
         </div>
         {% if request.user.is_superuser %}
         <div class="card-footer">
@@ -24,8 +24,7 @@ item in items %}
         {% endif %}
       </div>
     </div>
-    {% endfor %}
   </div>
 </div>
-
+{% endif %}
 {% endblock %}

@@ -1,4 +1,5 @@
 {% load static %}
+{% load qr_code %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,21 +104,6 @@
             <div class="nav">
               <div class="sb-sidenav-menu-heading text-white">Dashboard</div>
 
-              <div
-                class="collapse show"
-                id="collapseLayouts"
-                aria-labelledby="headingOne"
-                data-bs-parent="#sidenavAccordion"
-              >
-                <nav class="sb-sidenav-menu-nested nav">
-                  <a class="nav-link" href="{% url "dashboard" %}">
-                    <div class="sb-nav-link-icon">
-                      <i class="fa-brands fa-wpforms"></i>
-                    </div>
-                    Dashboard
-                  </a>
-                </nav>
-              </div>
               <div
                 class="collapse show"
                 id="collapseLayouts"
