@@ -10,4 +10,5 @@ urlpatterns = [
    path('add_item/', additem, name = "add_item"),
    path('delete_item/<int:id>', delete_item, name = "delete_item"),  
    path('categories/',categories,name = "categories"),
+   path('locations/',locations,name = "locations"),
 ]

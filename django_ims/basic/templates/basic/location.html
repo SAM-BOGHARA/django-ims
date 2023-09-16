@@ -4,12 +4,12 @@
     <div class="col">
         <div class="row">
             <form method="get" class="mb-4">
-                <h2>Filter by Categories</h2>
+                <h2>Filter by Location</h2>
                 <div class="form-check">
-                    {% for category in categories %}
-                    <input type="checkbox" class="form-check-inline " name="category" value="{{ category.id }}"
-                     {% if category.id in selected_categories %}checked{% endif %}>
-                    <label class="form-check-label">{{ category.name }}</label><br>
+                    {% for location in locations %}
+                    <input type="checkbox" class="form-check-inline " name="location" value="{{ location.id }}"
+                     {% if location.id in selected_locations %}checked{% endif %}>
+                    <label class="form-check-label">{{ location.name }}</label><br>
                     {% endfor %}
                 </div>
                 <button type="submit" class="btn btn-primary mt-2">Filter</button>

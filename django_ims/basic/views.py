@@ -13,19 +13,49 @@ from .models import *
 def dashboard(request):
     return render(request, "basic/dashboard.html")
 
+
 def categories(request):
     categories = Category.objects.all()
-    selected_categories = request.GET.getlist('category')
-    items = Item.objects.filter(category__in=selected_categories) if selected_categories else Item.objects.all()
-    return render(request, 'basic/category.html', {'categories': categories, 'items': items, 'selected_categories': selected_categories})
+    selected_categories = request.GET.getlist("category")
+    items = (
+        Item.objects.filter(category__in=selected_categories)
+        if selected_categories
+        else Item.objects.all()
+    )
+    return render(
+        request,
+        "basic/category.html",
+        {
+            "categories": categories,
+            "items": items,
+            "selected_categories": selected_categories,
+        },
+    )
+
+
+def locations(request):
+    locations = Location.objects.all()
+    selected_locations = request.GET.getlist("location")
+    items = (
+        Item.objects.filter(location__in=selected_locations)
+        if selected_locations
+        else Item.objects.all()
+    )
+    return render(
+        request,
+        "basic/location.html",
+        {
+            "locations": locations,
+            "items": items,
+            "selected_locations": selected_locations,
+        },
+    )
 
 
 def items(request):
     queryset = Item.objects.all()
-    
-    context = {
-        'items': queryset
-    }
+
+    context = {"items": queryset}
     return render(request, "basic/items.html", context)
 
 
@@ -43,10 +73,12 @@ def additem(request):
     }
     return render(request, "basic/additem.html", context)
 
-def delete_item(request,id):
+
+def delete_item(request, id):
     item = Item.objects.get(id=id)
     item.delete()
     return render(request, "basic/items.html")
+
 
 def login_page(request):
     if request.user.is_authenticated:
@@ -86,9 +118,7 @@ def register_page(request):
     user = User.objects.filter(username=username)
 
     if user.exists():
-        messages.warning(
-            request, "Username already taken.", extra_tags="alert-danger"
-        )
+        messages.warning(request, "Username already taken.", extra_tags="alert-danger")
         return redirect("/register")
 
     user = User.objects.create(username=username)
